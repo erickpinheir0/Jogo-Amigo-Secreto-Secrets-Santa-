@@ -1,7 +1,7 @@
 import random
 import integrante
-from fpdf import FPDF
-
+import tkinter as tk
+import json
 
 def abrirJanela():
     janela = tk.Tk()
@@ -59,10 +59,3 @@ def exibirResultadoSorteio(resultado):
         print(f"{pessoa} -> {amigo_secreto}")
     print("===========================")
 
-def gerarPDF(resultado):
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    for pessoa, amigo_secreto in resultado.items():
-        pdf.cell(200, 10, txt=f"{pessoa} -> {amigo_secreto}", ln=1, align="C")
-    pdf.output("resultado.pdf")

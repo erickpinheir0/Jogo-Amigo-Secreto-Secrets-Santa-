@@ -15,6 +15,3 @@ resultado = secrets.sortearAmigoSecreto(lista_participantes)
 # Exibindo o resultado do sorteio
 secrets.exibirResultadoSorteio(resultado)
 
-# Gerando o PDF
-secrets.gerarPDF(resultado)
-
