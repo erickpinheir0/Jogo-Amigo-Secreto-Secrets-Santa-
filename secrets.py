@@ -1,6 +1,7 @@
 import random
 import integrante
 from fpdf import FPDF
+from tkinter import Tk
 
 
 totalPessoas = int(input("Insira o número de pessoas que irão participar do amigo secreto: "))
