@@ -7,6 +7,8 @@ from tkinter import ttk
 
 import json
 
+#fiwaouifbnawkf
+
 def abrirJanela():
     janela = tk.Tk()
     janela.title("Amigo Secreto")
