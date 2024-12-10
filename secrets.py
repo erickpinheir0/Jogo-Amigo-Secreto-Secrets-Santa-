@@ -1,8 +1,24 @@
 import random
 import integrante
+<<<<<<< HEAD
 from fpdf import FPDF
 from tkinter import Tk
+=======
+import tkinter as tk
+import tkinter.messagebox
+import tkinter.simpledialog
+from tkinter import ttk
+>>>>>>> 96c0e61b9e8e6c334a56b5a4647169e879d08139
 
+import json
+
+#fiwaouifbnawkf
+
+def abrirJanela():
+    janela = tk.Tk()
+    janela.title("Amigo Secreto")
+    janela.geometry("400x300")
+    janela.mainloop()
 
 totalPessoas = int(input("Insira o número de pessoas que irão participar do amigo secreto: "))
 
@@ -54,10 +70,3 @@ def exibirResultadoSorteio(resultado):
         print(f"{pessoa} -> {amigo_secreto}")
     print("===========================")
 
-def gerarPDF(resultado):
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    for pessoa, amigo_secreto in resultado.items():
-        pdf.cell(200, 10, txt=f"{pessoa} -> {amigo_secreto}", ln=1, align="C")
-    pdf.output("resultado.pdf")

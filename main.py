@@ -2,6 +2,7 @@ import random
 import integrante
 import secrets
 
+# fiwaouifbnawkf
 
 # Criando a lista de participantes
 lista_participantes = secrets.criarLista()
@@ -14,7 +15,4 @@ resultado = secrets.sortearAmigoSecreto(lista_participantes)
 
 # Exibindo o resultado do sorteio
 secrets.exibirResultadoSorteio(resultado)
-
-# Gerando o PDF
-secrets.gerarPDF(resultado)
 
