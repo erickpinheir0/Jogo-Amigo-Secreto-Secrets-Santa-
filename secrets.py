@@ -1,14 +1,11 @@
 import random
 import integrante
-<<<<<<< HEAD
 from fpdf import FPDF
 from tkinter import Tk
-=======
 import tkinter as tk
 import tkinter.messagebox
 import tkinter.simpledialog
 from tkinter import ttk
->>>>>>> 96c0e61b9e8e6c334a56b5a4647169e879d08139
 
 import json
 

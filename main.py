@@ -2,7 +2,6 @@ import random
 import integrante
 import secrets
 
-# fiwaouifbnawkf
 
 # Criando a lista de participantes
 lista_participantes = secrets.criarLista()
