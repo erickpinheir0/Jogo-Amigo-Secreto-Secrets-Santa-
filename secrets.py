@@ -1,6 +1,10 @@
 import random
 import integrante
 import tkinter as tk
+import tkinter.messagebox
+import tkinter.simpledialog
+from tkinter import ttk
+
 import json
 
 def abrirJanela():
