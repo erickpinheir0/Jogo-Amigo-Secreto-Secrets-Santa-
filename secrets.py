@@ -3,6 +3,12 @@ import integrante
 from fpdf import FPDF
 
 
+def abrirJanela():
+    janela = tk.Tk()
+    janela.title("Amigo Secreto")
+    janela.geometry("400x300")
+    janela.mainloop()
+
 totalPessoas = int(input("Insira o número de pessoas que irão participar do amigo secreto: "))
 
 def criarLista():
