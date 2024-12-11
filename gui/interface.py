@@ -3,14 +3,13 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import PhotoImage
 import secrets
-from integrante import Integrante
+from logical.integrante import Integrante
+from logical.secrets import sortearAmigoSecreto
 
+class Interface:
 
-class Interface(Integrante):
-    def __init__(self, name, value, email):
-
-        super().__init__(name, value, email)
-        # Inicializa a janela principal
+    # Inicializa a janela principal
+    def __init__(self):
         self.root = tk.Tk()
         self.setup_window()
         self.setup_background()
@@ -132,7 +131,6 @@ class Interface(Integrante):
         self.draw_button.place(relx=0.5, rely=0.8, relwidth=0.2, relheight=0.05, anchor="center")
 
     def perform_draw(self):
-        from logical.secrets import sortearAmigoSecreto
         resultado = sortearAmigoSecreto(self.lista_participantes)
         self.exibir_resultado(resultado)
 
