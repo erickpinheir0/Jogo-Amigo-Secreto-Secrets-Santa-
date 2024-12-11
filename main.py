@@ -1,7 +1,7 @@
 import random
 import integrante
 import secrets
-
+import janela_principal
 
 
 # Criando a lista de participantes
