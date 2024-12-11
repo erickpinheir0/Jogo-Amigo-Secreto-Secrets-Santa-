@@ -1,24 +1,17 @@
 import random
 import integrante
-from fpdf import FPDF
-from tkinter import Tk
-import tkinter as tk
-import tkinter.messagebox
-import tkinter.simpledialog
-from tkinter import ttk
-
 import json
+import tkinter as tk
+from tkinter import ttk
+from tkinter import messagebox
+from tkinter import simpledialog
+from tkinter import colorchooser
+from tkinter import PhotoImage
 
-#fiwaouifbnawkf
 
-def abrirJanela():
-    janela = tk.Tk()
-    janela.title("Amigo Secreto")
-    janela.geometry("400x300")
-    janela.mainloop()
 
-totalPessoas = int(input("Insira o número de pessoas que irão participar do amigo secreto: "))
 
+"""
 def criarLista():
     lista_participantes = []
     for i in range(totalPessoas):
@@ -66,4 +59,4 @@ def exibirResultadoSorteio(resultado):
     for pessoa, amigo_secreto in resultado.items():
         print(f"{pessoa} -> {amigo_secreto}")
     print("===========================")
-
+"""
