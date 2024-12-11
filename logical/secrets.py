@@ -1,7 +1,7 @@
 import random
 import integrante
 import json
-
+import entry_window
 
 
 
