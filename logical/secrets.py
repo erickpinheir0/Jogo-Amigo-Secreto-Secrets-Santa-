@@ -1,17 +1,10 @@
 import random
 import integrante
 import json
-import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox
-from tkinter import simpledialog
-from tkinter import colorchooser
-from tkinter import PhotoImage
 
 
 
 
-"""
 def criarLista():
     lista_participantes = []
     for i in range(totalPessoas):
@@ -59,4 +52,3 @@ def exibirResultadoSorteio(resultado):
     for pessoa, amigo_secreto in resultado.items():
         print(f"{pessoa} -> {amigo_secreto}")
     print("===========================")
-"""

@@ -3,8 +3,7 @@ import integrante
 import secrets
 
 
-secrets.abrirJanela()
-"""
+
 # Criando a lista de participantes
 lista_participantes = secrets.criarLista()
 
@@ -16,4 +15,4 @@ resultado = secrets.sortearAmigoSecreto(lista_participantes)
 
 # Exibindo o resultado do sorteio
 secrets.exibirResultadoSorteio(resultado)
-"""
+
