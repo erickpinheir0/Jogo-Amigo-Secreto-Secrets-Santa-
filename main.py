@@ -1,21 +1,14 @@
-import random
-from logical import integrante
-import secrets
-import janela_principal
-import interface
+
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(current_dir)
+
+from gui.interface import Interface
+from gui.entry_window import EntryWindow
+from gui.show_results import ShowResults
 
 # Cria e executa a interface
-interface = criar_interface()
+interface = Interface()
 interface.run()
-
-# Criando a lista de participantes
-lista_participantes = secrets.criarLista()
-
-# Exibindo a lista de participantes
-secrets.exibirParticipantes(lista_participantes)
-
-# Realizando o sorteio
-resultado = secrets.sortearAmigoSecreto(lista_participantes)
-
-# Exibindo o resultado do sorteio
-secrets.exibirResultadoSorteio(resultado)

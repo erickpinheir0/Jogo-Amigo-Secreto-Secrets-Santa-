@@ -1,5 +1,5 @@
-from entry_window import EntryWindow
-from show_results import ShowResults
+from gui.entry_window import EntryWindow
+from gui.show_results import ShowResults
 import tkinter as tk
 from tkinter import ttk
 from tkinter import PhotoImage
@@ -137,13 +137,7 @@ class Interface:
 
     def exibir_resultado(self, resultado):
         show_results = ShowResults(self.root, resultado)
-        show_results.show_results()
 
     def run(self):
         """Inicia o loop principal da interface"""
         self.root.mainloop()
-
-# Função para criar e retornar uma instância da interface
-def criar_interface():
-    interface = Interface()
-    return interface
