@@ -2,6 +2,8 @@ import random
 import integrante
 import json
 import entry_window
+import tkinter as tk
+import interface
 
 
 
