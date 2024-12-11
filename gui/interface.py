@@ -1,4 +1,5 @@
 from entry_window import EntryWindow
+from show_results import ShowResults
 import tkinter as tk
 from tkinter import ttk
 from tkinter import PhotoImage
@@ -135,8 +136,8 @@ class Interface:
         self.exibir_resultado(resultado)
 
     def exibir_resultado(self, resultado):
-        for pessoa, amigo_secreto in resultado.items():
-            print(f"{pessoa} -> {amigo_secreto}")
+        show_results = ShowResults(self.root, resultado)
+        show_results.show_results()
 
     def run(self):
         """Inicia o loop principal da interface"""
