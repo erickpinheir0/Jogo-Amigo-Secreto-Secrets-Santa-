@@ -44,6 +44,8 @@ class EntryWindow(tk.Toplevel):
         self.entry = ttk.Entry(self, style="Custom.TEntry", font=("Arial", 14, "italic"), justify="center")
         self.entry.place(relx=0.5, rely=0.5, relwidth=0.55, relheight=0.25, anchor="center")
 
+        
+
         # Botão de confirmar
         self.confirm_button = ttk.Button(
             self,
