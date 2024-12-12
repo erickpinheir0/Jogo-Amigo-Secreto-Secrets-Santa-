@@ -154,6 +154,7 @@ class Interface:
         self.draw_button = ttk.Button(
             self.root,
             text="Realizar Sorteio",
+            style="Custom.TButton",
             command=self.perform_draw
         )
         self.draw_button.place(relx=0.5, rely=0.8, relwidth=0.2, relheight=0.05, anchor="center")

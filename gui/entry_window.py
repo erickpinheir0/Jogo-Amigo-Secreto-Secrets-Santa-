@@ -21,9 +21,8 @@ class EntryWindow(tk.Toplevel):
         # Configurar estilo da entrada
         style = ttk.Style()
         style.configure("Custom.TEntry",
-            justify="center", 
-            foreground="black", 
-            background="white")
+            justify="center"
+            )
         
         # Configurar estilo do botão
         style.configure("Confirm.TButton",
