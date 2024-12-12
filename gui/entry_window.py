@@ -44,7 +44,7 @@ class EntryWindow(tk.Toplevel):
         self.entry = ttk.Entry(self, style="Custom.TEntry", font=("Arial", 14, "italic"), justify="center")
         self.entry.place(relx=0.5, rely=0.5, relwidth=0.55, relheight=0.25, anchor="center")
 
-        
+        self.entry.bind("<Return>", self.entry_enter)
 
         # Botão de confirmar
         self.confirm_button = ttk.Button(
@@ -58,6 +58,9 @@ class EntryWindow(tk.Toplevel):
         
         # Variável para armazenar o resultado
         self.total_pessoas = None
+
+    def entry_enter(self, event):
+        self.confirmar()
 
     # Função para confirmar o número de participantes
     def confirmar(self):
