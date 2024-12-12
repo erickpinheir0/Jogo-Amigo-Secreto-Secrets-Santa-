@@ -20,7 +20,8 @@ class EntryWindow(tk.Toplevel):
 
         # Configurar estilo da entrada
         style = ttk.Style()
-        style.configure("Custom.TEntry", 
+        style.configure("Custom.TEntry",
+            justify="center", 
             foreground="black", 
             background="white")
         
@@ -41,7 +42,7 @@ class EntryWindow(tk.Toplevel):
         self.label.place(relx=0.53, rely=0.2, relwidth=1, relheight=0.3, anchor="center")
 
         # Campo de entrada
-        self.entry = ttk.Entry(self, style="Custom.TEntry")
+        self.entry = ttk.Entry(self, style="Custom.TEntry", font=("Arial", 14, "italic"), justify="center")
         self.entry.place(relx=0.5, rely=0.5, relwidth=0.55, relheight=0.25, anchor="center")
 
         # Botão de confirmar

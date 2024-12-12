@@ -1,11 +1,12 @@
 from gui.entry_window import EntryWindow
 from gui.show_results import ShowResults
-import tkinter as tk
-from tkinter import ttk
-from tkinter import PhotoImage
-import secrets
 from logical.integrante import Integrante
 from logical.secrets import sortearAmigoSecreto
+from tkinter import ttk
+from tkinter import PhotoImage
+from tkinter import messagebox
+import tkinter as tk
+import secrets
 
 class Interface:
 
@@ -92,9 +93,9 @@ class Interface:
             label_value.place(relx=0.5, rely=0.4, relwidth=0.2, relheight=0.05, anchor="center")
             label_email.place(relx=0.5, rely=0.5, relwidth=0.2, relheight=0.05, anchor="center")
 
-            entry_name = ttk.Entry(self.root)
-            entry_value = ttk.Entry(self.root)
-            entry_email = ttk.Entry(self.root)
+            entry_name = ttk.Entry(self.root, justify="center", font=("Arial", 14, "italic"))
+            entry_value = ttk.Entry(self.root, justify="center", font=("Arial", 14, "italic"))
+            entry_email = ttk.Entry(self.root, justify="center", font=("Arial", 14, "italic"))
 
             entry_name.place(relx=0.5, rely=0.35, relwidth=0.2, relheight=0.05, anchor="center")
             entry_value.place(relx=0.5, rely=0.45, relwidth=0.2, relheight=0.05, anchor="center")
@@ -106,7 +107,7 @@ class Interface:
                 style="Custom.TButton",
                 command=lambda: self.add_participant(entry_name, entry_value, entry_email)
             )
-            confirm_participant.place(relx=0.5, rely=0.6, relwidth=0.2, relheight=0.075, anchor="center")
+            confirm_participant.place(relx=0.5, rely=0.65, relwidth=0.2, relheight=0.075, anchor="center")
 
     def add_participant(self, entry_name, entry_value, entry_email):
 
@@ -114,6 +115,10 @@ class Interface:
         value = entry_value.get()
         email = entry_email.get()
         participant = Integrante(name, value, email)
+        if not participant.getNome() or not participant.getValor() or not participant.getEmail():
+            messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
+            return 
+        
         self.lista_participantes.append(participant)
 
         entry_name.delete(0, tk.END)

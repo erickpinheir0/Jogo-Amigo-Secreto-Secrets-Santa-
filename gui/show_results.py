@@ -14,12 +14,18 @@ class ShowResults(tk.Toplevel):
 
     def setup_window(self):
         self.title("Resultado do Sorteio")
-        self.geometry("600x400")
+        self.geometry("300x450")
         self.resizable(False, False)
 
     def show_results(self):
 
+        self.label = tk.Label(self, text="Resultado do Sorteio", font=("Comic Sans MS", 16, "bold"))
+        self.label.pack(anchor="center")
+
+        self.label = tk.Label(self, text="--------------------", font=("Comic Sans MS", 16, "bold"))        
+        self.label.pack(anchor="center")
+
         for pessoa, amigo_secreto in self.resultado.items():
-            label = tk.Label(self, text=f"{pessoa} -> {amigo_secreto}")
-            label.pack()
+            self.label = tk.Label(self, text=f"{pessoa} -> {amigo_secreto}", font=("Comic Sans MS", 12, "italic"))
+            self.label.pack()
         
