@@ -51,27 +51,45 @@ class Interface:
             self.icon_label4.place(x=1200, y=725, relwidth=0.145, relheight=0.2)
         except Exception as e:
             print(f"Erro ao carregar ícone: {e}")  # Adicionando print do erro
-    
+
     def create_widgets(self):
         """Cria os widgets da interface"""
-        try:
-            # Configurar estilo do botão
-            style = ttk.Style()
-            style.configure(
-                "Custom.TButton",
-                font=("Comic Sans MS", 16, "bold"),
-                background="lightgreen",
-            )
 
-            self.open_button = ttk.Button(
-                self.root,
-                text="Iniciar Amigo Secreto",
-                style="Custom.TButton",
-                command=self.open_entry_window
-            )
-            self.open_button.place(relx=0.40, rely=0.45, relwidth=0.2, relheight=0.075)
-        except Exception as e:
-            print(f"Erro ao criar botão: {e}")
+        # Texto e estilo do label
+        label = tk.Label(self.root, text="SECRETS SANTA - AMIGO SECRETO", font=("Comic Sans MS", 24, "bold"), bg="darkred", fg="white")
+        label.place(relx=0.5, rely=0.1, relwidth=0.5, relheight=0.075, anchor="center")
+
+        # Configurar estilo do botão
+        style = ttk.Style()
+        style.configure(
+            "Custom.TButton",
+            font=("Comic Sans MS", 16, "bold"),
+            background="lightgreen",
+        )
+
+        self.open_button = ttk.Button(
+            self.root,
+            text="Iniciar Jogo",
+            style="Custom.TButton",
+            command=self.open_entry_window
+        )
+        self.open_button.place(relx=0.40, rely=0.45, relwidth=0.2, relheight=0.075)
+
+        self.results = ttk.Button(
+            self.root,
+            text="Últimos Sorteios",
+            style="Custom.TButton",
+            command=self.perform_draw
+        )
+        self.results.place(relx=0.40, rely=0.55, relwidth=0.2, relheight=0.075)
+
+        self.quit_button = ttk.Button(
+            self.root,
+            text="Sair",
+            style="Custom.TButton",
+            command=self.root.quit
+        )
+        self.quit_button.place(relx=0.40, rely=0.65, relwidth=0.2, relheight=0.075)
 
     def open_entry_window(self):
         """Abre a janela secundária"""
@@ -79,6 +97,8 @@ class Interface:
         new_window.wait_window()
         if hasattr(new_window, 'total_pessoas') and new_window.total_pessoas:
             self.open_button.destroy()
+            self.results.destroy()
+            self.quit_button.destroy()
             self.total_pessoas = new_window.total_pessoas
             self.insert_participants()
 
@@ -96,6 +116,7 @@ class Interface:
             entry_name = ttk.Entry(self.root, justify="center", font=("Arial", 14, "italic"))
             entry_value = ttk.Entry(self.root, justify="center", font=("Arial", 14, "italic"))
             entry_email = ttk.Entry(self.root, justify="center", font=("Arial", 14, "italic"))
+            entry_name.focus_set()
 
             entry_name.place(relx=0.5, rely=0.35, relwidth=0.2, relheight=0.05, anchor="center")
             entry_value.place(relx=0.5, rely=0.45, relwidth=0.2, relheight=0.05, anchor="center")
@@ -115,6 +136,7 @@ class Interface:
         value = entry_value.get()
         email = entry_email.get()
         participant = Integrante(name, value, email)
+
         if not participant.getNome() or not participant.getValor() or not participant.getEmail():
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
             return 
