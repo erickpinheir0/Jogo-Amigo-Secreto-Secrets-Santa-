@@ -1,3 +1,5 @@
+from cProfile import label
+from textwrap import fill
 from gui.entry_window import EntryWindow
 from gui.show_results import ShowResults
 from logical.integrante import Integrante
@@ -6,7 +8,6 @@ from tkinter import ttk
 from tkinter import PhotoImage
 from tkinter import messagebox
 import tkinter as tk
-import secrets
 
 class Interface:
 
@@ -105,30 +106,67 @@ class Interface:
     def insert_participants(self):
         """Inserir participantes na interface"""
         for i in range(self.total_pessoas):
-            label_name = ttk.Label(self.root, text=f"Nome do Participante: ", font=("Comic Sans MS", 16, "bold"))
-            label_value = ttk.Label(self.root, text=f"Valor Inserido: ", font=("Comic Sans MS", 16, "bold"))
-            label_email = ttk.Label(self.root, text=f"Email: ", font=("Comic Sans MS", 16, "bold"))
 
-            label_name.place(relx=0.5, rely=0.3 , relwidth=0.2, relheight=0.05, anchor="center")
-            label_value.place(relx=0.5, rely=0.4, relwidth=0.2, relheight=0.05, anchor="center")
-            label_email.place(relx=0.5, rely=0.5, relwidth=0.2, relheight=0.05, anchor="center")
+            string_name = f"Nome do Participante "
+            string_value =f"Valor Inserido "
+            string_email = f"Email: "
+            string_fontLabel = ("Comic Sans MS", 16, "bold")
+            string_fontEntry = ("Arial", 14, "italic")
 
-            entry_name = ttk.Entry(self.root, justify="center", font=("Arial", 14, "italic"))
-            entry_value = ttk.Entry(self.root, justify="center", font=("Arial", 14, "italic"))
-            entry_email = ttk.Entry(self.root, justify="center", font=("Arial", 14, "italic"))
-            entry_name.focus_set()
+            positionx = 0.5
+            positiony = 0.3
+            fillwidth = 0.2
+            fillheight = 0.05
+            align_center = "center"
 
-            entry_name.place(relx=0.5, rely=0.35, relwidth=0.2, relheight=0.05, anchor="center")
-            entry_value.place(relx=0.5, rely=0.45, relwidth=0.2, relheight=0.05, anchor="center")
-            entry_email.place(relx=0.5, rely=0.55, relwidth=0.2, relheight=0.05, anchor="center")
+            label_name = ttk.Label(self.root, text=string_name, font=string_fontLabel)
+            label_value = ttk.Label(self.root, text=string_value, font=string_fontLabel)
+            label_email = ttk.Label(self.root, text=string_email, font=string_fontLabel)
 
-            confirm_participant = ttk.Button(
+            label_name.place(relx=positionx, rely=positiony, relwidth=fillwidth, relheight=fillheight, anchor=align_center)
+            label_value.place(relx=positionx, rely=positiony+0.1, relwidth=fillwidth, relheight=fillheight, anchor=align_center)
+            label_email.place(relx=positionx, rely=positiony+0.2, relwidth=fillwidth, relheight=fillheight, anchor=align_center)
+
+            self.entry_name = ttk.Entry(self.root, justify=align_center, font=string_fontEntry)
+            self.entry_value = ttk.Entry(self.root, justify=align_center, font=string_fontEntry)
+            self.entry_email = ttk.Entry(self.root, justify=align_center, font=string_fontEntry)
+
+            self.entry_name.place(relx=positionx, rely=positiony+0.05, relwidth=fillwidth, relheight=fillheight, anchor=align_center)
+            self.entry_value.place(relx=positionx, rely=positiony+0.15, relwidth=fillwidth, relheight=fillheight, anchor=align_center)
+            self.entry_email.place(relx=positionx, rely=positiony+0.25, relwidth=fillwidth, relheight=fillheight, anchor=align_center)
+
+            self.confirm_participant = ttk.Button(
                 self.root,
                 text="Confirmar",
                 style="Custom.TButton",
-                command=lambda: self.add_participant(entry_name, entry_value, entry_email)
+                command=lambda: self.add_participant(self.entry_name, self.entry_value, self.entry_email)
             )
-            confirm_participant.place(relx=0.5, rely=0.65, relwidth=0.2, relheight=0.075, anchor="center")
+            self.insert_keys()
+            self.confirm_participant.place(relx=0.5, rely=0.65, relwidth=0.2, relheight=0.075, anchor="center")
+
+    def insert_keys(self):
+        self.root.bind("<Return>", lambda event: self.confirm_participant.invoke())
+        self.entry_name.focus_set()
+        self.root.bind("<Up>", self.focus_up)
+        self.root.bind("<Down>", self.focus_down)
+
+
+    def focus_down(self, event):
+
+        if self.entry_name.focus_get() == self.entry_name:
+            self.entry_value.focus_set()
+        elif self.entry_value.focus_get() == self.entry_value:
+            self.entry_email.focus_set()
+        elif self.entry_email.focus_get() == self.entry_email:
+            self.entry_name.focus_set()
+
+    def focus_up(self, event):
+        if self.entry_email.focus_get() == self.entry_email:
+            self.entry_value.focus_set()  # Loop para o último Entry
+        elif self.entry_value.focus_get() == self.entry_value:
+            self.entry_name.focus_set()
+        elif self.entry_name.focus_get() == self.entry_name:
+            self.entry_email.focus_set()
 
     def add_participant(self, entry_name, entry_value, entry_email):
 
