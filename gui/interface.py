@@ -1,5 +1,4 @@
-from cProfile import label
-from textwrap import fill
+
 from gui.entry_window import EntryWindow
 from gui.show_results import ShowResults
 from logical.integrante import Integrante
@@ -149,7 +148,6 @@ class Interface:
         self.entry_name.focus_set()
         self.root.bind("<Up>", self.focus_up)
         self.root.bind("<Down>", self.focus_down)
-
 
     def focus_down(self, event):
 
