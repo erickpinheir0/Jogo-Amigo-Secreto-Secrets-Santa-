@@ -11,13 +11,15 @@ import tkinter as tk
 class Interface:
 
     # Inicializa a janela principal
-    def __init__(self):
+    def __init__(self, dados=None):
         self.root = tk.Tk()
         self.setup_window()
         self.setup_background()
         self.setup_icons()  # Adicionando a chamada do método
         self.create_widgets()
         self.lista_participantes = []
+        self.dados = dados
+        self.ultimos_resultados = self.dados
         
     def setup_window(self):
         """Configura as propriedades básicas da janela"""
@@ -80,7 +82,7 @@ class Interface:
             self.root,
             text="Últimos Sorteios",
             style="Custom.TButton",
-            command=self.perform_draw
+            command=lambda: self.exibir_ultimos_resultados(self.ultimos_resultados)
         )
         self.results.place(relx=0.40, rely=0.55, relwidth=0.2, relheight=0.075)
 
@@ -198,11 +200,19 @@ class Interface:
             style="Custom.TButton",
             command=self.perform_draw
         )
-        self.draw_button.place(relx=0.5, rely=0.8, relwidth=0.2, relheight=0.05, anchor="center")
+        self.play_again_button = ttk.Button(
+            self.root,
+            text="Jogar Novamente",
+            style="Custom.TButton",
+            command=self.jogar_novamente
+        )
+
+        self.draw_button.place(relx=0.5, rely=0.76, relwidth=0.2, relheight=0.05, anchor="center")
+        self.play_again_button.place(relx=0.5, rely=0.84, relwidth=0.2, relheight=0.05, anchor="center")
 
     def perform_draw(self):
-        resultado = sortearAmigoSecreto(self.lista_participantes)
-        self.exibir_resultado(resultado)
+        self.resultado = sortearAmigoSecreto(self.lista_participantes)
+        self.exibir_resultado(self.resultado)
 
     def exibir_resultado(self, resultado):
         self.draw_button.configure(state="disabled")
@@ -210,6 +220,16 @@ class Interface:
         self.show_results.wait_window()
         self.show_results.destroy()
         self.draw_button.configure(state="normal")
+        self.dados = self.resultado
+
+    def exibir_ultimos_resultados(self, ultimos_resultados):
+        self.show_results = ShowResults(self.root, ultimos_resultados)
+        self.show_results.wait_window()
+        self.show_results.destroy()
+
+    def jogar_novamente(self):
+        self.root.destroy()
+        self.__init__(self.dados)
 
     def run(self):
         """Inicia o loop principal da interface"""
