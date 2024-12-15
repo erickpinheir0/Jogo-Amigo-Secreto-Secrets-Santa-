@@ -67,12 +67,13 @@ class Interface:
             background="lightgreen",
         )
 
-        self.open_button = ttk.Button(
+        self.open_button = ttk.Button( 
             self.root,
             text="Iniciar Jogo",
             style="Custom.TButton",
             command=self.open_entry_window
         )
+
         self.open_button.place(relx=0.40, rely=0.45, relwidth=0.2, relheight=0.075)
 
         self.results = ttk.Button(
@@ -93,14 +94,18 @@ class Interface:
 
     def open_entry_window(self):
         """Abre a janela secundária"""
-        new_window = EntryWindow(self.root)
-        new_window.wait_window()
-        if hasattr(new_window, 'total_pessoas') and new_window.total_pessoas:
+        self.open_button.configure(state="disabled")
+
+        self.new_window = EntryWindow(self.root)
+        self.new_window.wait_window()
+        if hasattr(self.new_window, 'total_pessoas') and self.new_window.total_pessoas:
             self.open_button.destroy()
             self.results.destroy()
             self.quit_button.destroy()
-            self.total_pessoas = new_window.total_pessoas
+            self.total_pessoas = self.new_window.total_pessoas
             self.insert_participants()
+        else: 
+            self.open_button.configure(state="normal")
 
     def insert_participants(self):
         """Inserir participantes na interface"""
@@ -200,7 +205,11 @@ class Interface:
         self.exibir_resultado(resultado)
 
     def exibir_resultado(self, resultado):
-        show_results = ShowResults(self.root, resultado)
+        self.draw_button.configure(state="disabled")
+        self.show_results = ShowResults(self.root, resultado)
+        self.show_results.wait_window()
+        self.show_results.destroy()
+        self.draw_button.configure(state="normal")
 
     def run(self):
         """Inicia o loop principal da interface"""
