@@ -58,7 +58,7 @@ class Interface:
         """Cria os widgets da interface"""
 
         # Texto e estilo do label
-        label = tk.Label(self.root, text="SECRETS SANTA - AMIGO SECRETO", font=("Comic Sans MS", 24, "bold"), bg="darkred", fg="white")
+        label = tk.Label(self.root, text="⛇SECRETS SANTA - AMIGO SECRETO⛇", font=("Comic Sans MS", 24, "bold"), bg="darkred", fg="white")
         label.place(relx=0.5, rely=0.1, relwidth=0.5, relheight=0.075, anchor="center")
 
         # Configurar estilo do botão
@@ -71,7 +71,7 @@ class Interface:
 
         self.open_button = ttk.Button( 
             self.root,
-            text="Iniciar Jogo",
+            text="Iniciar Jogo☭",
             style="Custom.TButton",
             command=self.open_entry_window
         )
@@ -79,7 +79,7 @@ class Interface:
         self.open_button.place(relx=0.40, rely=0.45, relwidth=0.2, relheight=0.075)
         self.results = ttk.Button(
             self.root,
-            text="Últimos Sorteios",
+            text="Últimos Sorteios💭​",
             style="Custom.TButton",
             command=lambda: self.exibir_ultimos_resultados(self.resultado),
             state="disabled"
@@ -90,7 +90,7 @@ class Interface:
 
         self.quit_button = ttk.Button(
             self.root,
-            text="Sair",
+            text="​Sair⚠️​",
             style="Custom.TButton",
             command=self.root.quit
         )
