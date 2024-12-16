@@ -19,7 +19,7 @@ class Interface:
         self.create_widgets()
         self.lista_participantes = []
         self.dados = dados
-        self.ultimos_resultados = self.dados
+        self.resultado = self.dados
         
     def setup_window(self):
         """Configura as propriedades básicas da janela"""
@@ -82,7 +82,7 @@ class Interface:
             self.root,
             text="Últimos Sorteios",
             style="Custom.TButton",
-            command=lambda: self.exibir_ultimos_resultados(self.ultimos_resultados)
+            command=lambda: self.exibir_ultimos_resultados(self.resultado)
         )
         self.results.place(relx=0.40, rely=0.55, relwidth=0.2, relheight=0.075)
 
@@ -222,10 +222,12 @@ class Interface:
         self.draw_button.configure(state="normal")
         self.dados = self.resultado
 
-    def exibir_ultimos_resultados(self, ultimos_resultados):
-        self.show_results = ShowResults(self.root, ultimos_resultados)
+    def exibir_ultimos_resultados(self, resultado):
+        self.results.configure(state="disabled")
+        self.show_results = ShowResults(self.root, resultado)
         self.show_results.wait_window()
         self.show_results.destroy()
+        self.results.configure(state="normal")
 
     def jogar_novamente(self):
         self.root.destroy()

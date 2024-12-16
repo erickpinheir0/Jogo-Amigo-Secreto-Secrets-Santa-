@@ -6,10 +6,9 @@ from tkinter import colorchooser
 from tkinter import PhotoImage
 
 class ShowResults(tk.Toplevel):
-    def __init__(self, parent, resultado, ultimos_resultados=None):
+    def __init__(self, parent, resultado=None):
         super().__init__(parent)
         self.resultado = resultado
-        self.ultimos_resultados = ultimos_resultados
         self.setup_window()
         self.show_results()
 
@@ -27,17 +26,5 @@ class ShowResults(tk.Toplevel):
         self.label.pack(anchor="center")
 
         for pessoa, amigo_secreto in self.resultado.items():
-            self.label = tk.Label(self, text=f"{pessoa} -> {amigo_secreto}", font=("Comic Sans MS", 12, "italic"))
-            self.label.pack()
-        
-
-    def show_last_results(self):
-        self.label = tk.Label(self, text="Ultimos Resultados", font=("Comic Sans MS", 16, "bold"))
-        self.label.pack(anchor="center")
-
-        self.label = tk.Label(self, text="--------------------", font=("Comic Sans MS", 16, "bold"))        
-        self.label.pack(anchor="center")
-
-        for pessoa, amigo_secreto in self.ultimos_resultados.items():
             self.label = tk.Label(self, text=f"{pessoa} -> {amigo_secreto}", font=("Comic Sans MS", 12, "italic"))
             self.label.pack()
