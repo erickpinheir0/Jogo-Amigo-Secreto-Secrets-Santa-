@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter import Toplevel
 from tkinter import simpledialog
 from tkinter import colorchooser
 from tkinter import PhotoImage
@@ -17,6 +18,9 @@ class EntryWindow(tk.Toplevel):
         self.title("Entrada de Dados")
         self.geometry("350x120+600+500")  
         self.resizable(False, False)
+        self.attributes("-topmost", True)
+        self.grab_set()
+        self.grab_release()
 
         # Configurar estilo da entrada
         style = ttk.Style()
@@ -73,6 +77,10 @@ class EntryWindow(tk.Toplevel):
                 self.total_pessoas = valor
                 self.destroy()
             else:
+                self.attributes("-topmost", False)
                 messagebox.showerror("Erro", "Por favor, insira um número maior que zero!")
+                self.attributes("-topmost", True)
         except ValueError:
+            self.attributes("-topmost", False)
             messagebox.showerror("Erro", "Por favor, insira um número válido!")
+            self.attributes("-topmost", True)

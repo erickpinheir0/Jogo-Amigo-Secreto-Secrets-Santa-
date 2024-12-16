@@ -12,15 +12,15 @@ class Interface:
 
     # Inicializa a janela principal
     def __init__(self, dados=None):
+        self.dados = dados
+        self.resultado = self.dados
         self.root = tk.Tk()
         self.setup_window()
         self.setup_background()
         self.setup_icons()  # Adicionando a chamada do método
         self.create_widgets()
         self.lista_participantes = []
-        self.dados = dados
-        self.resultado = self.dados
-        
+       
     def setup_window(self):
         """Configura as propriedades básicas da janela"""
         self.root.title("Sorteio de Amigo Secreto")
@@ -77,14 +77,16 @@ class Interface:
         )
 
         self.open_button.place(relx=0.40, rely=0.45, relwidth=0.2, relheight=0.075)
-
         self.results = ttk.Button(
             self.root,
             text="Últimos Sorteios",
             style="Custom.TButton",
-            command=lambda: self.exibir_ultimos_resultados(self.resultado)
+            command=lambda: self.exibir_ultimos_resultados(self.resultado),
+            state="disabled"
         )
         self.results.place(relx=0.40, rely=0.55, relwidth=0.2, relheight=0.075)
+        if self.dados is not None:
+            self.results.configure(state="normal")
 
         self.quit_button = ttk.Button(
             self.root,
@@ -175,23 +177,40 @@ class Interface:
 
     def add_participant(self, entry_name, entry_value, entry_email):
 
-        name = entry_name.get()
-        value = entry_value.get()
-        email = entry_email.get()
+        name = entry_name.get().strip()
+        value = entry_value.get().strip()
+        email = entry_email.get().strip()
         participant = Integrante(name, value, email)
 
         if not participant.getNome() or not participant.getValor() or not participant.getEmail():
             messagebox.showerror("Erro", "Por favor, preencha todos os campos.")
-            return 
-        
+            return
+
+        try:
+            value = int(value)
+        except ValueError:
+            messagebox.showerror("Erro", "O campo valor deve ser um número inteiro. Por favor, tente novamente.")
+            return
+
+        if not name.replace(" ", "").isalpha():
+            messagebox.showerror("Erro", "O nome deve conter apenas letras e espaços. Por favor, tente novamente.")
+            return
+
         self.lista_participantes.append(participant)
+        messagebox.showinfo("Sucesso", f"Participante {name} adicionado com sucesso!")
 
         entry_name.delete(0, tk.END)
         entry_value.delete(0, tk.END)
         entry_email.delete(0, tk.END)
+        entry_name.focus_set()
+
 
         if len(self.lista_participantes) == self.total_pessoas:
                 self.create_draw_button()
+                self.confirm_participant.configure(state="disabled")
+                entry_name.configure(state="disabled")
+                entry_value.configure(state="disabled")
+                entry_email.configure(state="disabled")
 
     def create_draw_button(self):
         self.draw_button = ttk.Button(

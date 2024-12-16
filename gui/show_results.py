@@ -16,6 +16,7 @@ class ShowResults(tk.Toplevel):
         self.title("Resultado do Sorteio")
         self.geometry("300x450")
         self.resizable(False, False)
+        self.attributes("-topmost", True)
 
     def show_results(self):
 
